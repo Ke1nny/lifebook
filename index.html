@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Life Playbook | Would You Thrive in a Flexible Online Career?</title>
+<meta name="description" content="Take this free 60-second self-assessment to discover which digital work path fits your strengths best.">
+<link rel="icon" href="logo.jpeg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@1,700&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+  /* ---------- Theme tokens (from the logo) ---------- */
+  :root {
+    --ink:       #2f0a4f;
+    --ink-soft:  #5a2a82;
+    --brush:     #d6a9f0;
+    --lilac:     #c18fe6;
+    --mist:      #f3d9fc;
+    --cream:     #fdf6ee;
+    --white:     #ffffff;
+    --nav-h:     76px;
+    --font-script: "Lobster Two", "Brush Script MT", cursive;
+    --font-body:   "Nunito", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: var(--font-body);
+    color: var(--ink);
+    background: var(--cream);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  img { max-width: 100%; display: block; }
+  a { color: inherit; }
+  :focus-visible { outline: 3px solid var(--ink-soft); outline-offset: 3px; border-radius: 6px; }
+
+  .container { width: min(1180px, 100% - 40px); margin-inline: auto; }
+  section[id] { scroll-margin-top: var(--nav-h); }
+
+  /* ---------- Top strip ---------- */
+  .topstrip {
+    background: var(--ink);
+    color: var(--cream);
+    text-align: center;
+    font-size: .85rem;
+    font-weight: 700;
+    padding: 8px 12px;
+  }
+  .topstrip span { margin: 0 .6em; color: var(--lilac); }
+
+  /* ---------- Navigation ---------- */
+  .nav {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(253, 246, 238, .94);
+    -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+    border-bottom: 3px solid var(--ink);
+    transition: box-shadow .2s ease;
+  }
+  .nav.scrolled { box-shadow: 0 8px 24px rgba(47, 10, 79, .15); }
+  .nav-inner { height: var(--nav-h); display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+
+  .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .brand img { width: 52px; height: 52px; border-radius: 50%; object-fit: cover; }
+  .brand-name {
+    font-family: var(--font-script); font-style: italic; font-weight: 700;
+    font-size: 1.75rem; line-height: 1; color: var(--ink);
+  }
+
+  .nav-links { display: flex; align-items: center; gap: 6px; list-style: none; margin: 0; padding: 0; }
+  .nav-links a:not(.btn) {
+    display: block; padding: 10px 16px; border-radius: 999px;
+    font-weight: 800; text-decoration: none; transition: background .15s ease;
+  }
+  .nav-links a:not(.btn):hover { background: var(--mist); }
+
+  .menu-btn {
+    display: none; width: 46px; height: 46px; padding: 0; cursor: pointer;
+    background: var(--ink); border: 0; border-radius: 12px;
+  }
+  .menu-btn span, .menu-btn span::before, .menu-btn span::after {
+    display: block; width: 22px; height: 3px; margin: auto; background: var(--cream);
+    border-radius: 3px; position: relative; transition: transform .2s ease, background .2s ease;
+  }
+  .menu-btn span::before, .menu-btn span::after { content: ""; position: absolute; left: 0; }
+  .menu-btn span::before { top: -7px; }
+  .menu-btn span::after  { top: 7px; }
+  .menu-btn[aria-expanded="true"] span { background: transparent; }
+  .menu-btn[aria-expanded="true"] span::before { transform: translateY(7px) rotate(45deg); }
+  .menu-btn[aria-expanded="true"] span::after  { transform: translateY(-7px) rotate(-45deg); }
+
+  /* ---------- Buttons ---------- */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+    padding: 13px 24px; cursor: pointer;
+    font: 900 1rem/1.2 var(--font-body); letter-spacing: .01em; text-decoration: none;
+    color: var(--cream); background: var(--ink);
+    border: 3px solid var(--ink); border-radius: 999px;
+    box-shadow: 0 5px 0 var(--ink-soft);
+    transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+  }
+  .btn:hover { background: var(--ink-soft); transform: translateY(2px); box-shadow: 0 3px 0 var(--ink); }
+  .btn:hover .arrow { transform: translateX(5px); }
+  .btn:active { transform: translateY(5px); box-shadow: 0 0 0 var(--ink-soft); }
+  .btn .arrow { transition: transform .15s ease; }
+  .btn-lg { padding: 20px 38px; font-size: clamp(1.05rem, 3.4vw, 1.3rem); text-transform: uppercase; box-shadow: 0 7px 0 var(--ink-soft); }
+  .btn-sm { padding: 10px 20px; font-size: .95rem; }
+  .btn-light { background: var(--cream); color: var(--ink); border-color: var(--cream); box-shadow: 0 7px 0 var(--brush); }
+  .btn-light:hover { background: var(--white); box-shadow: 0 5px 0 var(--lilac); }
+
+  /* ---------- Hero ---------- */
+  .hero { position: relative; background: var(--cream); overflow: hidden; }
+
+  .hero-media { position: relative; height: 320px; background: linear-gradient(135deg, var(--mist), var(--brush)); border-bottom: 3px solid var(--ink); }
+  .hero-media img { width: 100%; height: 100%; object-fit: cover; object-position: 70% center; }
+
+  .hero-content { position: relative; padding: 36px 0 56px; text-align: center; }
+
+  .headline {
+    margin: 0 0 16px; font-weight: 900;
+    font-size: clamp(2.1rem, 7vw, 3.8rem); line-height: 1.08; letter-spacing: -.015em;
+  }
+  .swash {
+    display: inline; padding: 0 .1em;
+    background-image: linear-gradient(transparent 58%, var(--brush) 58%, var(--brush) 92%, transparent 92%);
+    background-repeat: no-repeat; background-size: 0% 100%;
+    -webkit-box-decoration-break: clone; box-decoration-break: clone;
+    animation: swash 900ms .3s cubic-bezier(.3,.7,.2,1) forwards;
+  }
+  @keyframes swash { to { background-size: 100% 100%; } }
+
+  .subhead { margin: 0 auto 26px; max-width: 34em; font-size: clamp(1.05rem, 2.6vw, 1.3rem); font-weight: 600; color: var(--ink-soft); }
+
+  .checks { list-style: none; margin: 0 0 32px; padding: 0; display: inline-flex; flex-direction: column; gap: 10px; text-align: left; }
+  .checks li { display: flex; align-items: center; gap: 12px; font-weight: 800; font-size: 1.05rem; }
+  .tick { flex: none; width: 26px; height: 26px; border-radius: 50%; background: var(--ink); display: grid; place-items: center; }
+  .tick svg { width: 14px; height: 14px; }
+
+  .hero-badge {
+    position: absolute; left: 18px; bottom: 18px; z-index: 2;
+    display: flex; align-items: center; gap: 10px;
+    background: var(--cream); border: 3px solid var(--ink); border-radius: 16px;
+    padding: 8px 14px; font-weight: 900; font-size: .9rem; line-height: 1.2;
+    box-shadow: 4px 4px 0 var(--brush);
+  }
+  .hero-badge b { font-family: var(--font-script); font-style: italic; font-size: 1.6rem; line-height: 1; }
+
+  /* ---------- Why section ---------- */
+  .why { background: var(--mist); border-block: 3px solid var(--ink); padding: 72px 0 80px; position: relative; overflow: hidden; }
+  .why::before {
+    content: ""; position: absolute; top: -80px; right: -90px; width: 320px; height: 260px;
+    background: var(--lilac); opacity: .55; border-radius: 0 0 0 70% / 0 0 0 60%;
+  }
+  .section-title { position: relative; text-align: center; margin: 0 0 44px; }
+  .section-title h2 { margin: 0; font-family: var(--font-script); font-style: italic; font-weight: 700; font-size: clamp(2.2rem, 6vw, 3.2rem); line-height: 1.1; }
+  .section-title p { margin: 8px 0 0; font-weight: 700; color: var(--ink-soft); }
+
+  .cards { position: relative; display: grid; grid-template-columns: 1fr; gap: 22px; }
+  .card {
+    background: var(--cream); border: 3px solid var(--ink); border-radius: 26px;
+    padding: 30px 26px; text-align: center; box-shadow: 7px 7px 0 var(--ink);
+  }
+  .card .icon {
+    width: 72px; height: 72px; margin: 0 auto 18px; display: grid; place-items: center;
+    background: var(--brush); border: 3px solid var(--ink); border-radius: 50%;
+  }
+  .card .icon svg { width: 34px; height: 34px; }
+  .card h3 { margin: 0; font-size: 1.2rem; font-weight: 900; line-height: 1.3; }
+
+  /* ---------- CTA band ---------- */
+  .cta-band { background: var(--ink); color: var(--cream); text-align: center; padding: 72px 0 80px; position: relative; overflow: hidden; }
+  .cta-band::before {
+    content: ""; position: absolute; bottom: -90px; left: -90px; width: 320px; height: 240px;
+    background: var(--ink-soft); border-radius: 0 60% 0 0 / 0 70% 0 0;
+  }
+  .cta-band .container { position: relative; }
+  .cta-band h2 { margin: 0 0 12px; font-family: var(--font-script); font-style: italic; font-weight: 700; font-size: clamp(2.1rem, 6vw, 3.2rem); line-height: 1.12; }
+  .cta-band p { margin: 0 auto 30px; max-width: 32em; font-weight: 600; font-size: 1.1rem; color: var(--mist); }
+
+  /* ---------- Footer ---------- */
+  .site-footer { background: var(--cream); padding: 42px 0 46px; text-align: center; font-size: .86rem; color: var(--ink-soft); }
+  .footer-brand { display: inline-flex; align-items: center; gap: 10px; margin-bottom: 18px; text-decoration: none; }
+  .footer-brand img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; }
+  .footer-brand span { font-family: var(--font-script); font-style: italic; font-weight: 700; font-size: 1.5rem; color: var(--ink); }
+  .footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 0; margin: 0 0 16px; padding: 0; list-style: none; font-weight: 800; font-size: .95rem; }
+  .footer-links li + li::before { content: "|"; margin: 0 14px; color: var(--lilac); }
+  .footer-links button { background: none; border: 0; padding: 2px 0; cursor: pointer; font: inherit; color: var(--ink); text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--lilac); }
+  .footer-links button:hover { text-decoration-color: var(--ink); }
+  .site-footer p { margin: 0 auto 10px; max-width: 62em; }
+
+  /* ---------- Policy dialogs ---------- */
+  dialog { width: min(92vw, 560px); max-height: 82vh; padding: 0; color: var(--ink); background: var(--cream); border: 5px solid var(--ink); border-radius: 26px; }
+  dialog::backdrop { background: rgba(47, 10, 79, .6); }
+  .modal-body { padding: 26px 26px 22px; overflow: auto; max-height: calc(82vh - 10px); }
+  .modal-body h2 { margin: 0 0 10px; font-family: var(--font-script); font-style: italic; font-weight: 700; font-size: 2rem; }
+  .modal-body p { margin: 0 0 12px; }
+
+  /* ---------- Mobile nav ---------- */
+  @media (max-width: 859px) {
+    .menu-btn { display: block; }
+    .nav-links {
+      position: absolute; top: 100%; left: 0; right: 0;
+      flex-direction: column; align-items: stretch; gap: 4px;
+      padding: 14px 20px 20px; background: var(--cream);
+      border-bottom: 3px solid var(--ink);
+      box-shadow: 0 16px 24px rgba(47,10,79,.18);
+      display: none;
+    }
+    .nav-links.open { display: flex; }
+    .nav-links a:not(.btn) { padding: 14px 16px; text-align: center; }
+    .nav-links .btn { margin-top: 6px; }
+    .brand-name { font-size: 1.5rem; }
+    .brand img { width: 46px; height: 46px; }
+    .hero-content .btn-lg { width: 100%; }
+  }
+
+  /* ---------- Desktop ---------- */
+  @media (min-width: 860px) {
+    .hero { min-height: 700px; display: flex; align-items: center; }
+    .hero-media { position: absolute; inset: 0; height: auto; }
+    .hero-media img { object-position: right center; }
+    .hero-media { border-bottom: 0; }
+    .hero-content { padding: 70px 0; text-align: left; width: 100%; }
+    .hero-copy {
+      max-width: 620px; padding: 42px 44px 44px;
+      background: rgba(253, 246, 238, .94);
+      border: 3px solid var(--ink); border-radius: 32px;
+      box-shadow: 9px 9px 0 var(--brush);
+    }
+    .subhead { margin-left: 0; }
+    .hero-badge { left: auto; right: 5vw; bottom: 36px; font-size: 1rem; padding: 12px 18px; }
+    .hero-badge b { font-size: 2rem; }
+    .cards { grid-template-columns: repeat(3, 1fr); gap: 28px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .swash { animation: none; background-size: 100% 100%; }
+    .btn, .btn .arrow, .menu-btn span, .menu-btn span::before, .menu-btn span::after { transition: none; }
+  }
+</style>
+</head>
+
+<body>
+
+<div class="topstrip">Career Growth<span aria-hidden="true">•</span>Smart Money<span aria-hidden="true">•</span>Daily Habits</div>
+
+<!-- ===== NAVIGATION ===== -->
+<header class="nav" id="nav">
+  <div class="container nav-inner">
+    <a class="brand" href="#home" aria-label="The Life Playbook, home">
+      <img src="logo.jpeg" alt="" width="52" height="52" onerror="this.style.display='none'">
+      <span class="brand-name">The Life Playbook</span>
+    </a>
+
+    <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="navLinks" aria-label="Toggle menu"><span></span></button>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#why">Why Take This Test</a></li>
+      <li><a class="btn btn-sm quiz-link" href="https://1buv.com/link?z=12298916&var={SOURCE_ID}&ymid={CLICK_ID}" rel="noopener">Free Quiz <span class="arrow" aria-hidden="true">→</span></a></li>
+    </ul>
+  </div>
+</header>
+
+<main>
+  <!-- ===== HERO ===== -->
+  <section class="hero" id="home" aria-labelledby="headline">
+    <div class="hero-media">
+      <img src="img1.png" alt="Person working on a laptop at a bright desk" fetchpriority="high" onerror="this.style.display='none'">
+      <div class="hero-badge" aria-hidden="true"><b>60s</b><span>quick<br>assessment</span></div>
+    </div>
+
+    <div class="container hero-content">
+      <div class="hero-copy">
+        <h1 class="headline" id="headline">Would You Thrive in a <span class="swash">Flexible Online Career?</span></h1>
+        <p class="subhead">Take this 60-second self-assessment to discover which digital work path fits your strengths best.</p>
+
+        <ul class="checks" aria-label="Why take this test">
+          <li><span class="tick"><svg viewBox="0 0 14 14" fill="none" stroke="#fdf6ee" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 7.5l3.2 3L12 3.5"/></svg></span>Takes less than 60 seconds to finish</li>
+          <li><span class="tick"><svg viewBox="0 0 14 14" fill="none" stroke="#fdf6ee" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 7.5l3.2 3L12 3.5"/></svg></span>Instant personalized work-style score</li>
+          <li><span class="tick"><svg viewBox="0 0 14 14" fill="none" stroke="#fdf6ee" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 7.5l3.2 3L12 3.5"/></svg></span>100% free — no sign-up fees required</li>
+        </ul>
+
+        <div>
+          <a class="btn btn-lg quiz-link" href="https://1buv.com/link?z=12298916&var={SOURCE_ID}&ymid={CLICK_ID}" rel="noopener">Start the free quiz now <span class="arrow" aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== WHY TAKE THIS TEST ===== -->
+  <section class="why" id="why" aria-labelledby="why-title">
+    <div class="container">
+      <div class="section-title">
+        <h2 id="why-title">Why take this test</h2>
+      </div>
+      <div class="cards">
+        <article class="card">
+          <div class="icon"><svg viewBox="0 0 32 32" fill="none" stroke="#2f0a4f" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="16" cy="17" r="11"/><path d="M16 10v7l4.5 3M12 3h8"/></svg></div>
+          <h3>Takes less than 60 seconds to finish</h3>
+        </article>
+        <article class="card">
+          <div class="icon"><svg viewBox="0 0 32 32" fill="none" stroke="#2f0a4f" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 27V15M12 27V8M20 27V19M28 27V4"/></svg></div>
+          <h3>Instant personalized work-style score</h3>
+        </article>
+        <article class="card">
+          <div class="icon"><svg viewBox="0 0 32 32" fill="none" stroke="#2f0a4f" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="12" width="24" height="16" rx="2"/><path d="M16 12v16M3 12h26v-4H3zM16 8c-3-6-9-4-7 0M16 8c3-6 9-4 7 0"/></svg></div>
+          <h3>100% free — no sign-up fees required</h3>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FINAL CTA ===== -->
+  <section class="cta-band" aria-labelledby="cta-title">
+    <div class="container">
+      <h2 id="cta-title">Find the digital work path that fits you</h2>
+      <p>One minute. Free. Your personalized work-style score is waiting.</p>
+      <a class="btn btn-lg btn-light quiz-link" href="https://1buv.com/link?z=12298916&var={SOURCE_ID}&ymid={CLICK_ID}" rel="noopener">Start the free quiz now <span class="arrow" aria-hidden="true">→</span></a>
+    </div>
+  </section>
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer class="site-footer">
+  <div class="container">
+    <a class="footer-brand" href="#home"><img src="logo.jpeg" alt="" width="44" height="44" onerror="this.style.display='none'"><span>The Life Playbook</span></a>
+    <ul class="footer-links">
+      <li><button type="button" data-modal="privacy">Privacy Policy</button></li>
+      <li><button type="button" data-modal="terms">Terms of Use</button></li>
+      <li><button type="button" data-modal="disclaimer">Disclaimer</button></li>
+    </ul>
+    <p>&copy; <span id="year">2026</span> The Life Playbook</p>
+  </div>
+</footer>
+
+<dialog id="modal" aria-labelledby="modalTitle">
+  <div class="modal-body">
+    <h2 id="modalTitle"></h2>
+    <div id="modalText"></div>
+    <button type="button" class="btn btn-sm" id="modalClose">Close</button>
+  </div>
+</dialog>
+
+<script>
+  /* ---------- Mobile menu ---------- */
+  const menuBtn = document.getElementById("menuBtn");
+  const navLinks = document.getElementById("navLinks");
+  function setMenu(open) {
+    navLinks.classList.toggle("open", open);
+    menuBtn.setAttribute("aria-expanded", String(open));
+  }
+  menuBtn.addEventListener("click", () => setMenu(!navLinks.classList.contains("open")));
+  navLinks.querySelectorAll("a").forEach(a => a.addEventListener("click", () => setMenu(false)));
+  document.addEventListener("keydown", e => { if (e.key === "Escape") setMenu(false); });
+  window.addEventListener("resize", () => { if (window.innerWidth >= 860) setMenu(false); });
+
+  /* ---------- Nav shadow on scroll ---------- */
+  const nav = document.getElementById("nav");
+  const onScroll = () => nav.classList.toggle("scrolled", window.scrollY > 8);
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
+  /* ---------- Policy dialogs (replace with your own legal copy) ---------- */
+  const POLICIES = {
+    privacy: { title: "Privacy Policy", html: "<p>We respect your privacy. This page does not collect personal information itself. When you click the quiz button you are taken to a third-party page that may collect information under its own privacy policy.</em></p>" },
+    terms: { title: "Terms of Use", html: "<p>By using this site you agree to use it for lawful, personal purposes only. The quiz is a self-assessment for general interest and is not a guarantee of any job, income or result.</em></p>" },
+    disclaimer: { title: "Disclaimer", html: "<p>The Life Playbook shares general information about careers, money and habits. It is not professional, financial or legal advice. Individual outcomes vary. We may receive compensation when you click links on this page.</p><p></em></p>" }
+  };
+  const modal = document.getElementById("modal");
+  document.querySelectorAll("[data-modal]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const p = POLICIES[btn.dataset.modal];
+      document.getElementById("modalTitle").textContent = p.title;
+      document.getElementById("modalText").innerHTML = p.html;
+      modal.showModal ? modal.showModal() : modal.setAttribute("open", "");
+    });
+  });
+  document.getElementById("modalClose").addEventListener("click", () => modal.close());
+  modal.addEventListener("click", e => { if (e.target === modal) modal.close(); });
+
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
